@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+var browserSupport = ("WebSocket" in window) ? true : false;
+console.log(browserSupport);
+
+if(browserSupport){
+	var socket = new WebSocket("ws://localhost:4444");
+	
+	socket.onopen = function (){
+		console.log("Conexion establecida");
+		socket.send("{\"start\":\"true\"}");
+	};
+	
+	socket.onmessage = onMessage;
+	
+}
+
+function onMessage(event) {
+    //var data = JSON.parse(event.data);
+    //console.log("Msg recibido:" + data.value);
+    
+    console.log("Msg recibido:" + event.data);
+    
+}
+	
+
+</script>
+</head>
+<body>
+<h2>Prueba de Web socket</h2>
+</body>
+</html>
