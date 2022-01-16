@@ -17,14 +17,26 @@ if(browserSupport){
 	};
 	
 	socket.onmessage = onMessage;
-	
+	socket.onclose = onClose;
+	socket.onerror = onError;
 }
 
 function onMessage(event) {
     //var data = JSON.parse(event.data);
     //console.log("Msg recibido:" + data.value);
-    
     console.log("Msg recibido:" + event.data);
+    socket.close();
+    
+}
+
+function onClose() {
+    console.log("Connection is closed...");
+    
+}
+
+
+function onError(event) {
+    console.log("Ocurrio un error: ", event);
     
 }
 	
